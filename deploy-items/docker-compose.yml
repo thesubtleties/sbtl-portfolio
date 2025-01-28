@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  astro-portfolio:
+    build: . # Build using the Dockerfile in the current directory
+    container_name: astro-portfolio
+    restart: unless-stopped
+    networks:
+      - shared_portainer_network # Use your existing shared network
+    expose:
+      - '3000' # Expose port 3000 internally for NPM to access
+
+networks:
+  shared_portainer_network:
+    external: true # Use the existing shared network

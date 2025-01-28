@@ -1,0 +1,245 @@
+---
+import EmailIcon from './icons/EmailIcon.astro';
+import LinkedInIcon from './icons/LinkedInIcon.astro';
+import GitHubIcon from './icons/GitHubIcon.astro';
+import FadeIn from '../components/FadeIn';
+---
+
+<section id="about" class="min-h-screen flex items-center justify-center px-4 py-16">
+  <div class="about-container">
+    <div class="about-header">
+      <FadeIn client:visible>
+        <h2 class="name">Steven Glab</h2>
+      </FadeIn>
+      
+      <FadeIn client:visible delay={0.2}>
+        <div class="contact-links">
+          <a href="mailto:steven@sbtl.dev" class="icon-link" aria-label="Email" target="_blank">
+            <EmailIcon />
+          </a>
+          <a href="https://linkedin.com/in/stevenglab" class="icon-link" aria-label="LinkedIn" target="_blank">
+            <LinkedInIcon />
+          </a>
+          <a href="https://github.com/thesubtleties" class="icon-link" aria-label="GitHub" target="_blank">
+            <GitHubIcon />
+          </a>
+        </div>
+      </FadeIn>
+    </div>
+
+    <div class="content-section">
+      <FadeIn client:visible delay={0.4}>
+        <div class="transition-story">
+          <p class="highlight-text">
+            Forward-thinking technology professional transitioning to software development, combining full-stack expertise with 12+ years of business leadership experience.
+          </p>
+        </div>
+      </FadeIn>
+
+      <div class="skills-container">
+        <FadeIn client:visible delay={0.6}>
+          <div class="skills-group">
+            <h3>Frontend Development</h3>
+            <div class="skills-list">
+              <span class="skill-tag">React 18</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">Redux Toolkit</span>
+              <span class="skill-tag">RTK Query</span>
+              <span class="skill-tag">Vite</span>
+              <span class="skill-tag">React Router</span>
+              <span class="skill-tag">Mantine UI</span>
+              <span class="skill-tag">Zod</span>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn client:visible delay={0.7}>
+          <div class="skills-group">
+            <h3>Backend & API</h3>
+            <div class="skills-list">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Express</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Flask</span>
+              <span class="skill-tag">Flask-Smorest</span>
+              <span class="skill-tag">RESTful APIs</span>
+              <span class="skill-tag">OpenAPI</span>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn client:visible delay={0.8}>
+          <div class="skills-group">
+            <h3>Database & ORM</h3>
+            <div class="skills-list">
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">SQLAlchemy</span>
+              <span class="skill-tag">Sequelize</span>
+              <span class="skill-tag">Flask-SQLAlchemy</span>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn client:visible delay={0.9}>
+          <div class="skills-group">
+            <h3>DevOps & Tools</h3>
+            <div class="skills-list">
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Docker Compose</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">MinIO</span>
+              <span class="skill-tag">JWT</span>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+
+      <FadeIn client:visible delay={1}>
+        <div class="background-highlight">
+          <p>Scaled operations from $1.5M to $5M+ in revenue while leading technical implementations for Fortune 500 executives and government leaders.</p>
+        </div>
+      </FadeIn>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .about-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .name {
+    font-family: 'Mr Dafoe', sans-serif; 
+    font-size: 3.5rem; 
+    font-weight: 400; 
+    color: var(--color-primary);
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.02em; 
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
+  }
+
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .icon-link {
+    color: var(--color-accent);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
+
+  .icon-link svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .icon-link:hover {
+    color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .transition-story {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .highlight-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--color-primary);
+  }
+
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .skills-group h3 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+
+  .skills-group h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--color-accent);
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    background-color: var(--color-subtle);
+    color: var(--color-primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+
+    border: 1px solid rgba(0, 0, 0, .03);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .skill-tag:hover {
+    background-color: var(--color-accent);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .background-highlight {
+    text-align: center;
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-top: 1px solid var(--color-subtle);
+  }
+
+  @media (max-width: 768px) {
+    .about-container {
+      padding: 1rem;
+    }
+
+    .name {
+      font-size: 2rem;
+    }
+
+    .skills-container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
