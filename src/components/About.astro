@@ -23,6 +23,15 @@ import FadeIn from '../components/FadeIn';
           <a href="https://github.com/thesubtleties" class="icon-link" aria-label="GitHub" target="_blank">
             <GitHubIcon />
           </a>
+          <span class="separator">|</span>
+          <a 
+            href="/steven-glab-resume-2025.pdf" 
+            class="resume-link" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            résumé
+          </a>
         </div>
       </FadeIn>
     </div>
@@ -227,6 +236,46 @@ import FadeIn from '../components/FadeIn';
     margin: 0 auto;
     padding: 2rem;
     border-top: 1px solid var(--color-subtle);
+  }
+  .separator {
+    color: var(--color-accent);
+    opacity: 0.5;
+    margin: 0 0.5rem;
+  }
+
+  .resume-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+  .resume-link:hover {
+    color: var(--color-primary);
+    border-color: var(--color-subtle);
+    background-color: var(--color-subtle);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .contact-links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .separator {
+      display: none;
+    }
+
+    .resume-link {
+      margin-top: 1rem;
+      padding: 0.4rem 1rem;
+      background-color: var(--color-subtle);
+    }
   }
 
   @media (max-width: 768px) {

@@ -1,30 +1,28 @@
 # Stage 1: Build the Astro site
 FROM node:18-alpine AS builder
 
-# Set working directory
 WORKDIR /app
-
-# Copy package.json and install dependencies
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the application code
 COPY . .
-
-# Build the Astro site
 RUN npm run build
+# Add a log to see what's in the dist directory after build
+RUN ls -la dist/
 
 # Stage 2: Serve the static files
 FROM node:18-alpine
 
-# Install serve globally
 RUN npm install -g serve
 
-# Copy the built files from the builder stage
-COPY --from=builder /app/dist /app/dist
+# Be explicit about the directory structure
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
 
-# Expose port 3000 (default for serve)
+# Add a log to verify files are copied
+RUN ls -la dist/
+
 EXPOSE 3000
 
-# Start serve
-CMD ["serve", "-s", "dist", "-l", "4321"]
+# Modified serve command with explicit path and single page application flag
+CMD ["serve", "-s", "/app/dist", "-l", "3000", "--single"]
