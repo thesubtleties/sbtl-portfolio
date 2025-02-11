@@ -1,5 +1,5 @@
 ---
-
+import SmoothScroll from "./react/SmoothScroll"
 ---
 
 <section id="home" class="min-h-screen flex items-center justify-center px-4">
@@ -32,6 +32,13 @@
 		</div>
 	  </div>
 	</div>
+  <SmoothScroll 
+    client:load
+    scrollSensitivity={15}    
+    debounceTime={30}         
+    scrollThreshold={40}      
+    animationDuration={800}  
+  />
   </section>
   
   <style>
@@ -200,4 +207,40 @@
 		margin-left: 1rem;
 	  }
 	}
+
+	:global(.scroll-indicator) {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-accent);
+    opacity: 0.6;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  :global(.scroll-indicator:hover) {
+    opacity: 1;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.6;
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      opacity: 0.3;
+      transform: translateX(-50%) translateY(5px);
+    }
+    100% {
+      opacity: 0.6;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  :global(.scroll-indicator svg) {
+    animation: pulse 2s infinite;
+  }
   </style>
