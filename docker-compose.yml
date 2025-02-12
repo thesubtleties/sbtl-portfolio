@@ -7,8 +7,8 @@ services:
     restart: unless-stopped
     networks:
       - shared_portainer_network
-    expose:
-      - '3000'
+    ports:
+      - '3000:3000'
     # Add healthcheck
     healthcheck:
       test: ['CMD', 'wget', '--spider', '-q', 'http://localhost:3000']

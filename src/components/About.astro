@@ -38,74 +38,95 @@ import FadeIn from '../components/FadeIn';
 
     <div class="content-section">
       <FadeIn client:visible delay={0.4}>
-        <div class="transition-story">
-          <p class="highlight-text">
-            Forward-thinking technology professional transitioning to software development, combining full-stack expertise with 12+ years of business leadership experience.
-          </p>
+        <div class="tab-navigation">
+          <button class="tab-button active" data-tab="overview">Overview</button>
+          <button class="tab-button" data-tab="journey">My Journey</button>
         </div>
-      </FadeIn>
 
-      <div class="skills-container">
-        <FadeIn client:visible delay={0.6}>
-          <div class="skills-group">
-            <h3>Frontend Development</h3>
-            <div class="skills-list">
-              <span class="skill-tag">React 18</span>
-              <span class="skill-tag">TypeScript</span>
-              <span class="skill-tag">Redux Toolkit</span>
-              <span class="skill-tag">RTK Query</span>
-              <span class="skill-tag">Vite</span>
-              <span class="skill-tag">React Router</span>
-              <span class="skill-tag">Mantine UI</span>
-              <span class="skill-tag">Zod</span>
+        <div class="tab-content">
+          <!-- Overview Tab -->
+          <div class="tab-panel active" id="overview">
+            <div class="transition-story">
+              <p class="highlight-text">
+                Forward-thinking technology professional transitioning to software development, combining full-stack expertise with 12+ years of business leadership experience.
+              </p>
+            </div>
+
+            <div class="skills-container">
+              <div class="skills-group">
+                <h3>Frontend Development</h3>
+                <div class="skills-list">
+                  <span class="skill-tag">React 18</span>
+                  <span class="skill-tag">TypeScript</span>
+                  <span class="skill-tag">Redux Toolkit</span>
+                  <span class="skill-tag">RTK Query</span>
+                  <span class="skill-tag">Vite</span>
+                  <span class="skill-tag">React Router</span>
+                  <span class="skill-tag">Mantine UI</span>
+                  <span class="skill-tag">Zod</span>
+                </div>
+              </div>
+
+              <div class="skills-group">
+                <h3>Backend & API</h3>
+                <div class="skills-list">
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">Express</span>
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">Flask</span>
+                  <span class="skill-tag">Flask-Smorest</span>
+                  <span class="skill-tag">RESTful APIs</span>
+                  <span class="skill-tag">OpenAPI</span>
+                </div>
+              </div>
+
+              <div class="skills-group">
+                <h3>Database & ORM</h3>
+                <div class="skills-list">
+                  <span class="skill-tag">PostgreSQL</span>
+                  <span class="skill-tag">SQLAlchemy</span>
+                  <span class="skill-tag">Sequelize</span>
+                  <span class="skill-tag">Flask-SQLAlchemy</span>
+                </div>
+              </div>
+
+              <div class="skills-group">
+                <h3>DevOps & Tools</h3>
+                <div class="skills-list">
+                  <span class="skill-tag">Docker</span>
+                  <span class="skill-tag">Docker Compose</span>
+                  <span class="skill-tag">Git</span>
+                  <span class="skill-tag">MinIO</span>
+                  <span class="skill-tag">JWT</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="background-highlight">
+              <p>Scaled operations from $1.5M to $5M+ in revenue while leading technical implementations for Fortune 500 executives and government leaders.</p>
             </div>
           </div>
-        </FadeIn>
 
-        <FadeIn client:visible delay={0.7}>
-          <div class="skills-group">
-            <h3>Backend & API</h3>
-            <div class="skills-list">
-              <span class="skill-tag">Node.js</span>
-              <span class="skill-tag">Express</span>
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">Flask</span>
-              <span class="skill-tag">Flask-Smorest</span>
-              <span class="skill-tag">RESTful APIs</span>
-              <span class="skill-tag">OpenAPI</span>
+          <!-- Journey Tab -->
+          <div class="tab-panel" id="journey">
+            <div class="journey-content">
+              <p class="journey-text">
+                My path to software development began in the world of technical production, where I discovered that the difference between good and exceptional often lives in the subtleties.
+              </p>
+            
+              <p class="journey-text">
+                When traditional events transformed in 2020, I led our company's evolution into virtual productions. While guiding our team through technical platform customizations, I found myself drawn deeper into development. Through The Odin Project, I discovered that the same attention to detail that made our events successful translated perfectly to coding.
+              </p>
+            
+              <p class="journey-text">
+                Creating my first React application crystallized this connection. What began as a task list, inspired by the quiet elegance of Japanese alleyways, became a revelation: here was a craft where technical precision and creative vision were inseparable – the same balance I had always sought in production.
+              </p>
+            
+              <p class="journey-text">
+                Just as in technical production, where the best events seamlessly combine functionality and aesthetics, I approach software development with the same principle: create solutions that work flawlessly while maintaining an elegant user experience. It's about building systems where every detail serves a purpose, whether it's immediately visible or working quietly in the background.
+              </p>
             </div>
           </div>
-        </FadeIn>
-
-        <FadeIn client:visible delay={0.8}>
-          <div class="skills-group">
-            <h3>Database & ORM</h3>
-            <div class="skills-list">
-              <span class="skill-tag">PostgreSQL</span>
-              <span class="skill-tag">SQLAlchemy</span>
-              <span class="skill-tag">Sequelize</span>
-              <span class="skill-tag">Flask-SQLAlchemy</span>
-            </div>
-          </div>
-        </FadeIn>
-
-        <FadeIn client:visible delay={0.9}>
-          <div class="skills-group">
-            <h3>DevOps & Tools</h3>
-            <div class="skills-list">
-              <span class="skill-tag">Docker</span>
-              <span class="skill-tag">Docker Compose</span>
-              <span class="skill-tag">Git</span>
-              <span class="skill-tag">MinIO</span>
-              <span class="skill-tag">JWT</span>
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-
-      <FadeIn client:visible delay={1}>
-        <div class="background-highlight">
-          <p>Scaled operations from $1.5M to $5M+ in revenue while leading technical implementations for Fortune 500 executives and government leaders.</p>
         </div>
       </FadeIn>
     </div>
@@ -113,6 +134,7 @@ import FadeIn from '../components/FadeIn';
 </section>
 
 <style>
+  /* Keep your existing styles and add: */
   .about-container {
     max-width: 1000px;
     width: 100%;
@@ -263,6 +285,20 @@ import FadeIn from '../components/FadeIn';
   }
 
   @media (max-width: 768px) {
+    .about-container {
+      padding: 1rem;
+    }
+
+    .name {
+      font-size: 3rem;
+    }
+
+    .skills-container {
+      grid-template-columns: 1fr;
+    }
+    
+  }
+  @media (max-width: 768px) {
     .contact-links {
       flex-wrap: wrap;
       justify-content: center;
@@ -278,18 +314,118 @@ import FadeIn from '../components/FadeIn';
       height: auto;
     }
   }
+  .tab-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .tab-button {
+    background-color: var(--color-subtle);
+    color: var(--color-primary);
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    border: 1px solid rgba(0, 0, 0, .03);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .tab-button:hover {
+    transform: translateY(-2px);
+    background-color: var(--color-accent);
+    color: white;
+  }
+
+  .tab-button.active {
+    background-color: var(--color-accent);
+    color: white;
+  }
+
+  .tab-content {
+    position: relative;
+  }
+
+  .tab-panel {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.3s ease;
+    min-height: 600px;
+  }
+
+  .tab-panel.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    min-height: 600px;
+  }
+
+  .journey-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .journey-intro {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .journey-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-primary);
+    text-align: center;
+    text-align-last: center;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   @media (max-width: 768px) {
-    .about-container {
-      padding: 1rem;
+    .tab-navigation {
+      gap: 0.5rem;
     }
 
-    .name {
-      font-size: 3rem;
+    .tab-button {
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
     }
 
-    .skills-container {
-      grid-template-columns: 1fr;
+    .journey-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
     }
   }
 </style>
+
+<script>
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons and panels
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabPanels.forEach(panel => panel.classList.remove('active'));
+
+      // Add active class to clicked button and corresponding panel
+      button.classList.add('active');
+      const tabId = button.dataset.tab;
+      document.getElementById(tabId)?.classList.add('active');
+    });
+  });
+</script>
+
