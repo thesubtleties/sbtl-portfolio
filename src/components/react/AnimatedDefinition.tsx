@@ -15,78 +15,146 @@ const AnimatedDefinition: React.FC<AnimatedDefinitionProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || !containerRef.current) return;
+useEffect(() => {
+  if (typeof window === 'undefined' || !containerRef.current) return;
 
-    const ctx = gsap.context(() => {
-      // Split both lines into characters for typing
-      const split1 = new SplitText('.animate-text-1', { type: 'chars' });
-      const split2 = new SplitText('.animate-text-2', { type: 'chars' });
+  const ctx = gsap.context(() => {
+    // Show the container first
+    gsap.set(containerRef.current, { visibility: 'visible' });
 
-      // Set up typing effect for both lines
-      gsap.set([...split1.chars, ...split2.chars], {
-        opacity: 0,
-      });
+    // Split with smartWrap to prevent mid-word breaks
+    const split1 = new SplitText(containerRef.current.querySelector('.animate-text-1'), { 
+      type: 'chars',
+      smartWrap: true // This keeps words together!
+    });
+    const split2 = new SplitText(containerRef.current.querySelector('.animate-text-2'), { 
+      type: 'chars',
+      smartWrap: true
+    });
+    
+    const allChars = [...split1.chars, ...split2.chars];
+    const totalTypingDuration = allChars.length * 0.04;
 
-      // Set delayed content - breathe in below final position
-      gsap.set('.delayed-fade', {
-        opacity: 0,
-        scale: 0.97,
-        y: 35, // Start below where it should end up
-        transformOrigin: 'center center',
-      });
+    // Set up initial states
+    gsap.set(allChars, {
+      opacity: 0,
+    });
 
-      const tl = gsap.timeline();
+    gsap.set(containerRef.current.querySelectorAll('.delayed-fade'), {
+      opacity: 0,
+      scale: 0.97,
+      y: 35,
+      transformOrigin: 'center center',
+    });
 
-      // First line: typing
-      tl.to(split1.chars, {
-        opacity: 1,
-        duration: 0.05,
-        ease: 'none',
-        stagger: 0.04,
+    const tl = gsap.timeline();
+
+    // Type the entire first definition
+    tl.to(allChars, {
+      opacity: 1,
+      duration: 0.05,
+      ease: 'none',
+      stagger: 0.04,
+    })
+    
+    // Rest of animation
+    .to(containerRef.current.querySelectorAll('.delayed-fade'), {
+      opacity: 1,
+      scale: 1,
+      duration: 0.8,
+      ease: 'sine.out',
+      stagger: 0.12
+    }, totalTypingDuration * 0.7)
+    
+    .to(containerRef.current.querySelectorAll('.delayed-fade'), {
+      y: 0,
+      duration: 0.4,
+      ease: 'power2.out',
+      stagger: 0.08
+    }, totalTypingDuration - 0.4);
+
+    return () => {
+      split1.revert();
+      split2.revert();
+    };
+  }, containerRef);
+
+  return () => ctx.revert();
+}, []);
+
+useEffect(() => {
+  if (typeof window === 'undefined') return;
+
+  const ctx = gsap.context(() => {
+    const wordElement = document.querySelector('.word');
+    let currentText = '';
+
+    // Start empty
+    wordElement.textContent = '';
+
+    const tl = gsap.timeline({ delay: 1 });
+
+    // Type out "subtl"
+    ['s', 'u', 'b', 't', 'l'].forEach((letter) => {
+      tl.call(() => {
+        currentText += letter;
+        wordElement.textContent = currentText;
       })
+      .to({}, { duration: 0.15 });
+    });
 
-        // Brief pause
-        .to({}, { duration: 0.4 })
+    // Brief pause after typing "subtl"
+    tl.to({}, { duration: 0.8 });
 
-        // Second line: typing
-        .to(split2.chars, {
-          opacity: 1,
-          duration: 0.05,
-          ease: 'none',
-          stagger: 0.04,
-        })
+    // Backspace all the way back to just "s"
+    // Remove 'l'
+    tl.call(() => {
+      currentText = currentText.slice(0, -1);
+      wordElement.textContent = currentText; // "subt"
+    })
+    .to({}, { duration: 0.12 })
+    // Remove 't'
+    .call(() => {
+      currentText = currentText.slice(0, -1);
+      wordElement.textContent = currentText; // "sub"
+    })
+    .to({}, { duration: 0.12 })
+    // Remove 'b'
+    .call(() => {
+      currentText = currentText.slice(0, -1);
+      wordElement.textContent = currentText; // "su"
+    })
+    .to({}, { duration: 0.12 })
+    // Remove 'u'
+    .call(() => {
+      currentText = currentText.slice(0, -1);
+      wordElement.textContent = currentText; // "s"
+    })
+    .to({}, { duration: 0.12 })
 
-        // Phase 1: Breathe in (no vertical movement)
-        .to('.delayed-fade', {
-          opacity: 1,
-          scale: 1,
-          // y stays at 35 - no movement yet
-          duration: 0.8,
-          ease: 'sine.out',
-          stagger: 0.15,
-        })
+    // Brief pause - "now let me be more precise"
+    .to({}, { duration: 0.4 })
 
-        // Brief pause - let it sit as static text
-        .to({}, { duration: 0.3 })
+    // Retype "btl"
+    .call(() => {
+      currentText += 'b';
+      wordElement.textContent = currentText; // "sb"
+    })
+    .to({}, { duration: 0.15 })
+    .call(() => {
+      currentText += 't';
+      wordElement.textContent = currentText; // "sbt"
+    })
+    .to({}, { duration: 0.15 })
+    .call(() => {
+      currentText += 'l';
+      wordElement.textContent = currentText; // "sbtl"
+    });
 
-        // Phase 2: Nudge up to final position
-        .to('.delayed-fade', {
-          y: 0, // Move to final spot
-          duration: 0.4,
-          ease: 'power2.out',
-          stagger: 0.08,
-        });
+  });
 
-      return () => {
-        split1.revert();
-        split2.revert();
-      };
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
+  return () => ctx.revert();
+}, []);
   return (
     <div ref={containerRef} className={`dictionary-entry ${className}`}>
       <div className="word-section">
