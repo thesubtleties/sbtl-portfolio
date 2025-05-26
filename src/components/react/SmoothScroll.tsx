@@ -1,18 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 
-const SmoothScroll = ({
+interface SmoothScrollProps {
+  scrollSensitivity?: number;
+  debounceTime?: number;
+  scrollThreshold?: number;
+  animationDuration?: number;
+}
+
+const SmoothScroll: React.FC<SmoothScrollProps> = ({
   scrollSensitivity = 5,
   debounceTime = 10,
   scrollThreshold = 20,
   animationDuration = 1000,
 }) => {
-  const isScrollingRef = useRef(false);
+  const isScrollingRef = useRef<boolean>(false);
   const scrollTimeout = useRef<NodeJS.Timeout>();
-  const accumulatedDeltaRef = useRef(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const accumulatedDeltaRef = useRef<number>(0);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
-    const checkMobile = () => {
+    const checkMobile = (): void => {
       setIsMobile(window.innerWidth <= 999);
     };
 
@@ -27,16 +34,16 @@ const SmoothScroll = ({
       return;
     }
 
-    // Add this function to prevent default scroll behavior
-    const preventScroll = (e: WheelEvent) => {
+    const preventScroll = (e: WheelEvent): boolean => {
       if (isScrollingRef.current) {
         e.preventDefault();
         e.stopPropagation();
         return false;
       }
+      return true;
     };
 
-    const handleWheel = (e: WheelEvent) => {
+    const handleWheel = (e: WheelEvent): boolean => {
       if (isScrollingRef.current) {
         e.preventDefault();
         e.stopPropagation();
@@ -51,10 +58,10 @@ const SmoothScroll = ({
 
       scrollTimeout.current = setTimeout(() => {
         if (accumulatedDeltaRef.current > scrollSensitivity) {
-          const sections = document.querySelectorAll('section');
+          const sections = document.querySelectorAll<HTMLElement>('section');
           const scrollPosition = window.scrollY;
 
-          let targetSection: Element | null = null;
+          let targetSection: HTMLElement | null = null;
           let minDistance = Infinity;
 
           sections.forEach((section) => {
@@ -78,7 +85,6 @@ const SmoothScroll = ({
           ) {
             isScrollingRef.current = true;
 
-            // Add event listener to prevent scroll during animation
             window.addEventListener('wheel', preventScroll, { passive: false });
 
             targetSection.scrollIntoView({
@@ -88,7 +94,6 @@ const SmoothScroll = ({
 
             setTimeout(() => {
               isScrollingRef.current = false;
-              // Remove the prevent scroll listener after animation
               window.removeEventListener('wheel', preventScroll);
             }, animationDuration);
           }
@@ -96,13 +101,14 @@ const SmoothScroll = ({
 
         accumulatedDeltaRef.current = 0;
       }, debounceTime);
+
+      return true;
     };
 
     if (!isMobile) {
-      // Change passive to false to allow preventDefault
       window.addEventListener('wheel', handleWheel, { passive: false });
       document.documentElement.style.scrollSnapType = 'y proximity';
-      const sections = document.querySelectorAll('section');
+      const sections = document.querySelectorAll<HTMLElement>('section');
       sections.forEach((section) => {
         section.style.scrollSnapAlign = 'start';
       });
